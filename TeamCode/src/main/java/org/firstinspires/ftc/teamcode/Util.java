@@ -1,9 +1,14 @@
 package org.firstinspires.ftc.teamcode;
 
+import com.qualcomm.hardware.gobilda.GoBildaPinpointDriver;
 import com.qualcomm.hardware.limelightvision.Limelight3A;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.HardwareMap;
+
+import org.firstinspires.ftc.teamcode.mechanisms.AprilTagWebcam;
+
+// Starter Bot name: Sean Baron
 
 public class Util {
 
@@ -14,6 +19,9 @@ public class Util {
     public DcMotorEx frontLeft;
     public DcMotorEx backLeft;
     public Limelight3A limelight;
+    public AprilTagWebcam webcam;
+    public GoBildaPinpointDriver pinpoint;
+    //public DcMotorEx launcher = null;
 
     // Takes 3 inputs that sets the speed for each of the
     // wheels to drive forward, strafe, and turn.
@@ -35,7 +43,8 @@ public class Util {
         initMotors();
         initServos();
         initSensors();
-        initLimelight();
+        initCamera();
+        pinpoint = ahwMap.get(GoBildaPinpointDriver.class, "pinpoint");
     }
 
     public void initMotors() {
@@ -57,11 +66,25 @@ public class Util {
 
     }
 
-    public void initLimelight() {
+    public void initCamera() {
         limelight = hwMap.get(Limelight3A.class, "limelight");
         limelight.start();
         // 0 = april, 1 = blue, 2 = red, 3 = yellow
         limelight.pipelineSwitch(0);
+        webcam = hwMap.get(AprilTagWebcam.class, "Webcam");
     }
 
+    public boolean limelightStatus() {
+        return limelight.isConnected();
+    }
+
+    /*void launch (){
+    * if (gamepad1.right_bumper) {
+      *launcher.setVelocity(LAUNCHER_TARGET_VELOCITY);
+       *telemetry.addData("Launcher", launcher.getVelocity());
+        *}
+        *  else {
+        *   launcher.setVelocity(0);
+     } this all will most likely not work.*/
 }
+

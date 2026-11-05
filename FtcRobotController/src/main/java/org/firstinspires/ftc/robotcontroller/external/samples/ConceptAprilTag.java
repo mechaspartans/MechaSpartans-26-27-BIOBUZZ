@@ -224,7 +224,6 @@ public class ConceptAprilTag extends LinearOpMode {
         for (AprilTagDetection detection : currentDetections) {
             if (detection instanceof AprilTagSingleDetection) {
                 AprilTagSingleDetection singleDet = (AprilTagSingleDetection) detection;
-
                 if (singleDet.metadata != null) {
                     telemetry.addLine(String.format("\n==== (ID %d) %s", singleDet.id, singleDet.metadata.name));
                     telemetry.addLine(String.format("XYZ %6.1f %6.1f %6.1f  (inch)", detection.ftcPose.x, detection.ftcPose.y, detection.ftcPose.z));

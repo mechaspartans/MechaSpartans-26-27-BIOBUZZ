@@ -1,8 +1,6 @@
 package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
-import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.DcMotorEx;
 
 @com.qualcomm.robotcore.eventloop.opmode.TeleOp
 public class TeleOp extends OpMode {
@@ -16,6 +14,14 @@ public class TeleOp extends OpMode {
     public void init() {
         util = new Util();
         util.init(hardwareMap);
+    }
+
+    // This is originally called when the "init" button is pressed on the
+    // driver's hub and repeated
+    @Override
+    public void init_loop() {
+        telemetry.addData("limelight status", util.limelightStatus());
+        telemetry.update();
     }
 
     // Repeatedly runs the code inside during the start button
@@ -36,8 +42,8 @@ public class TeleOp extends OpMode {
         } else {
             x2 = 0;
         }
-
         util.drive(y1, x1, x2);
+        telemetry.update();
         // Harrison - Went in and fixed the formatting
         // of the code and removed original setPower's 9/28/26
     }
